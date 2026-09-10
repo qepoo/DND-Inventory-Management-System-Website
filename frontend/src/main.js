@@ -3,7 +3,7 @@ import DataTable from 'datatables.net-dt'; //import DataTable
 import { v4 as uuidv4 } from 'uuid'; //import unique id generator funct
 import { createElement } from 'react';
 
-const apiURL = 'http://127.0.0.1:5000/api/home';
+const apiURL = 'http://127.0.0.1:5000/inventory';
 
 // finds a table on the page with the matching selector
 // when a row is added, creates a default column (6th) with a delete button
@@ -19,7 +19,8 @@ const table = new DataTable('#inventory-table', {
     null,
     null,
     { visible: false },
-    { defaultContent: '<button class="p-2 btn btn-danger btn-sm delete-item" title="delete-item">Delete</button>' },
+    { defaultContent: '<button class="w-100 btn btn-primary btn-sm edit-item" title="edit-item">Edit</button>'},
+    { defaultContent: '<button class="w-100 btn btn-danger btn-sm delete-item" title="delete-item">Delete</button>' },
   ],
   createdRow: function (row, data) {
     if (data[5] == 'noId') {
@@ -122,9 +123,13 @@ document.getElementById('new-row-form').addEventListener('submit', (event) => {
   });
 });
 
-// delete a row from a table and api
+// function for deleting and editing row data in a table and api
 document.getElementById('inventory-table').addEventListener('click', (e) => {
-  if (e.target.classList.contains('delete-item')) {
+  if (e.target.classList.contains('edit-item')) {
+    const row = e.target.closest('tr');
+    console.log(row);
+  }
+  else if (e.target.classList.contains('delete-item')) {
     const row = e.target.closest('tr');
     const payload = row.id;
 

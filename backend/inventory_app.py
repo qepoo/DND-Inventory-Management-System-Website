@@ -21,20 +21,27 @@ inventory = [
     }
 ]
 
-@app.route("/api/home", methods=['GET', 'POST', 'DELETE'])
-def return_home():
+@app.route("/inventory", methods=['GET', 'POST', 'PUT', 'DELETE'])
+def home():
     if request.method == 'POST':
         data = request.get_json()
         inventory.append(data)
         return jsonify(data), 201
+        
+    if request.method == 'PUT':
+        data = request.get_json()
+        for i, v in enumerate(inventory):
+            if v['id'] == data:
+                inventory[i] = data
+                return jsonify(data), 200
         
     if request.method == 'DELETE':
         data = request.get_json()
         for item in inventory:
             if item['id'] == data:
                 inventory.remove(item)
-                continue
-    
+                return jsonify(inventory), 204
+            
     return jsonify(inventory)
 
 if __name__ == "__main__":

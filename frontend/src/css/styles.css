@@ -73,6 +73,10 @@ h2 {
   height: 10rem;
 }
 
+.icon-zone>div {
+  margin-top: -1rem;
+}
+
 .required-field-star {
   color: red;
 }
@@ -99,6 +103,7 @@ form>div.flex-container {
 .input-zone {
   flex-direction: row;
   justify-content: space-evenly;
+  padding-bottom: 4rem;
 }
 
 .input-labels {
@@ -108,7 +113,15 @@ form>div.flex-container {
   padding-right: 0.5rem;
 }
 
+.input-labels>* {
+  min-height: 8%;
+}
+
 .input-fields {
   flex-direction: column; 
   justify-content: space-evenly;
+}
+
+.input-fields>* {
+  min-height: 8%;
 }
